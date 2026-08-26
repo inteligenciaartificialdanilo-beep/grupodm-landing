@@ -2,8 +2,14 @@ import { useEffect, useState } from 'react'
 import {
   MessageCircle, Mail, Instagram, MapPin, ArrowRight, Menu, X,
   ShieldCheck, Truck, Sparkles, Users, Award, Calendar,
-  Download, ChevronDown, Target, Eye, Heart,
+  Download, ChevronDown, Target, Eye, Heart, Wrench,
 } from 'lucide-react'
+
+// ==============================================
+// FLAG DE MANUTENÇÃO
+// Trocar pra `false` quando o site estiver pronto pra ir ao ar de verdade.
+// ==============================================
+const MODO_MANUTENCAO = true
 
 const WHATSAPP = '5544997233294'
 const WHATSAPP_DISPLAY = '(44) 99723-3294'
@@ -78,11 +84,17 @@ function Nav({ scrolled }: { scrolled: boolean }) {
     }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2">
-          <img
-            src="/logo-dm-horizontal.png"
-            alt="Grupo DM"
-            className={`h-10 w-auto transition-all ${scrolled ? '' : 'brightness-0 invert'}`}
-          />
+          {scrolled ? (
+            <img
+              src="/logo-dm-horizontal.png"
+              alt="Grupo DM"
+              className="h-10 w-auto transition-all"
+            />
+          ) : (
+            <span className="font-display text-white text-2xl font-bold tracking-tight">
+              GRUPO <span className="italic">DM</span>
+            </span>
+          )}
         </a>
         <div className="hidden md:flex items-center gap-8">
           {links.map(l => (
@@ -251,29 +263,38 @@ function Sobre() {
           </div>
         </div>
         <div className="relative">
-          <div className="aspect-square bg-gradient-to-br from-brand via-brand-light to-brand-dark rounded-3xl shadow-2xl relative overflow-hidden">
+          <div className="aspect-square bg-white border-4 border-brand/10 rounded-3xl shadow-2xl relative overflow-hidden">
             <div
-              className="absolute inset-0 opacity-30"
+              className="absolute inset-0 opacity-40"
               style={{
                 backgroundImage:
-                  'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25) 0%, transparent 50%)',
+                  'radial-gradient(circle at 30% 30%, rgba(11,22,138,0.06) 0%, transparent 60%)',
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center p-16">
+            <div className="absolute inset-0 flex items-center justify-center p-14">
               <img
                 src="/logo-dm-horizontal.png"
                 alt="Grupo DM"
-                className="w-full h-auto brightness-0 invert"
+                className="w-full h-auto"
               />
             </div>
           </div>
-          <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-[240px]">
+          <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-[240px] border border-slate-100">
             <div className="bg-emerald-100 text-emerald-700 rounded-lg p-2">
               <ShieldCheck size={20} />
             </div>
             <div>
               <div className="font-bold text-slate-900 text-sm">Qualidade garantida</div>
               <div className="text-xs text-slate-500">Controle em cada etapa</div>
+            </div>
+          </div>
+          <div className="absolute -top-6 -left-6 bg-brand rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-[220px]">
+            <div className="bg-white/20 text-white rounded-lg p-2">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <div className="font-bold text-white text-sm">Fabricação própria</div>
+              <div className="text-xs text-white/70">Do desenho à entrega</div>
             </div>
           </div>
         </div>
@@ -593,7 +614,9 @@ function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <img src="/logo-dm-horizontal.png" alt="Grupo DM" className="h-10 w-auto brightness-0 invert mb-4" />
+            <div className="bg-white rounded-xl p-3 inline-block mb-4">
+              <img src="/logo-dm-horizontal.png" alt="Grupo DM" className="h-8 w-auto" />
+            </div>
             <p className="text-sm leading-relaxed">
               Copos personalizados, brindes e produtos corporativos.
               Fabricação própria com entrega em todo Brasil.
@@ -652,6 +675,68 @@ function WhatsAppFloat() {
   )
 }
 
+function Manutencao() {
+  return (
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center px-6 py-16 bg-brand">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-light via-brand to-brand-dark" />
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 25% 20%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 75% 80%, rgba(255,255,255,0.1) 0%, transparent 50%)',
+        }}
+      />
+      <div className="relative z-10 max-w-2xl mx-auto text-center text-white">
+        <div className="bg-white rounded-2xl p-4 inline-block mb-8 shadow-2xl">
+          <img src="/logo-dm-horizontal.png" alt="Grupo DM" className="h-12 w-auto" />
+        </div>
+
+        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6">
+          <Wrench size={14} className="animate-pulse" />
+          Site em manutenção
+        </div>
+
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+          Estamos deixando <br className="hidden sm:block" />
+          <span className="italic font-light">tudo do jeito certo.</span>
+        </h1>
+
+        <p className="text-lg md:text-xl text-white/80 mb-4 leading-relaxed">
+          Nosso novo site chega em breve — com mais catálogos, novidades e a cara nova do Grupo DM.
+        </p>
+        <p className="text-base text-white/70 mb-10">
+          Enquanto isso, fala com a gente direto pelo WhatsApp que o atendimento continua rodando normal.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a
+            href={whatsappLink('Olá! Vi o site do Grupo DM em manutenção e gostaria de um orçamento.')}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 bg-white text-brand font-bold px-8 py-4 rounded-full text-lg shadow-2xl hover:scale-105 transition-transform"
+          >
+            <MessageCircle size={22} /> WhatsApp {WHATSAPP_DISPLAY}
+          </a>
+          <a
+            href={INSTAGRAM}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-white/90 font-semibold px-6 py-4 rounded-full border border-white/30 hover:bg-white/10 transition"
+          >
+            <Instagram size={18} /> {INSTAGRAM_HANDLE}
+          </a>
+        </div>
+
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-white/60">
+          <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-white transition">
+            <Mail size={14} /> {EMAIL}
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
@@ -659,6 +744,10 @@ export default function App() {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  if (MODO_MANUTENCAO) {
+    return <Manutencao />
+  }
 
   return (
     <>
