@@ -5,3 +5,10 @@ dist
 .env.local
 .DS_Store
 *.log
+
+# Nunca comitar PDFs no repo (usar imagens extraidas)
+public/catalogos/**/*.pdf
+public/catalogos/*.pdf
+
+# Cache do tsc build
+*.tsbuildinfo
