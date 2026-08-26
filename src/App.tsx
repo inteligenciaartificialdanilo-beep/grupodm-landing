@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   MessageCircle, Mail, Instagram, MapPin, ArrowRight, Menu, X,
   ShieldCheck, Truck, Sparkles, Users, Award, Calendar,
-  ExternalLink, Download, ChevronDown,
+  Download, ChevronDown, Target, Eye, Heart,
 } from 'lucide-react'
 
 const WHATSAPP = '5544997233294'
@@ -15,35 +15,27 @@ const MAPS_QUERY = 'https://www.google.com/maps/search/?api=1&query=grupo+dm+dis
 const whatsappLink = (msg = 'Olá! Vim pelo site e gostaria de um orçamento.') =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`
 
-// Catálogos — o usuário vai colocar os PDFs em /public/catalogos/
-// Se o arquivo não existir, o download fica desabilitado
+// Catálogos — capa gerada da 1ª página do PDF via pdf-poppler
 const CATALOGOS = [
-  { titulo: 'Copos Personalizados 2026', arquivo: 'copos-personalizados-2026.pdf', cor: 'from-brand to-brand-light' },
-  { titulo: 'Copos Acrílicos', arquivo: 'copos-acrilico-2026.pdf', cor: 'from-brand-light to-brand' },
-  { titulo: 'Copos Térmicos', arquivo: 'copos-termicos-2026.pdf', cor: 'from-brand-dark to-brand' },
-  { titulo: 'Coleção Copa 2026', arquivo: 'catalogo-copa-2026.pdf', cor: 'from-brand to-brand-dark' },
-  { titulo: 'Brindes Corporativos', arquivo: 'brindes-corporativos.pdf', cor: 'from-brand-light to-brand-dark' },
-  { titulo: 'Linha Personalizada Completa', arquivo: 'linha-personalizada.pdf', cor: 'from-brand-dark to-brand-light' },
-]
-
-const SISTEMAS = [
   {
-    nome: 'DISC PRO',
-    descricao: 'Análise comportamental DISC pra sua equipe',
-    url: 'https://disc.grupodm.com.br',
-    disponivel: true,
+    titulo: 'Copos Personalizados 2026',
+    arquivo: 'copos-personalizados-2026.pdf',
+    capa: '/catalogos/thumb-personalizados-01.jpg',
   },
   {
-    nome: 'Catálogo Online',
-    descricao: 'Nosso portfólio completo em tempo real',
-    url: 'https://catalogo.grupodm.com.br',
-    disponivel: true,
+    titulo: 'Copos Acrílicos 2026',
+    arquivo: 'copos-acrilico-2026.pdf',
+    capa: '/catalogos/thumb-acrilico-01.jpg',
   },
   {
-    nome: 'Kanban Interno',
-    descricao: 'Sistema de gestão de produção',
-    url: 'https://kanban.grupodm.com.br',
-    disponivel: true,
+    titulo: 'Copos Térmicos 2026',
+    arquivo: 'copos-termicos-2026.pdf',
+    capa: '/catalogos/thumb-termicos-01.jpg',
+  },
+  {
+    titulo: 'Coleção Copa 2026',
+    arquivo: 'catalogo-copa-2026.pdf',
+    capa: '/catalogos/thumb-copa-1.jpg',
   },
 ]
 
@@ -76,8 +68,8 @@ function Nav({ scrolled }: { scrolled: boolean }) {
   const [open, setOpen] = useState(false)
   const links = [
     { href: '#sobre', label: 'Sobre' },
+    { href: '#mvv', label: 'Nossa história' },
     { href: '#produtos', label: 'Produtos' },
-    { href: '#sistemas', label: 'Sistemas' },
     { href: '#contato', label: 'Contato' },
   ]
   return (
@@ -169,11 +161,15 @@ function Hero() {
         </div>
 
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6">
-          Sua marca no copo <br className="hidden md:block" />
-          <span className="italic font-light">do jeito certo.</span>
+          Sua marca na mão <br className="hidden md:block" />
+          <span className="italic font-light">de todo mundo.</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+          <span className="italic">Porque a sua ainda não está?</span>
+        </p>
+
+        <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
           Copos personalizados, brindes corporativos e produtos para eventos.
           Fabricação própria, qualidade garantida, entrega em todo Brasil.
         </p>
@@ -286,6 +282,63 @@ function Sobre() {
   )
 }
 
+function MissaoVisaoValores() {
+  const itens = [
+    {
+      icon: Target,
+      titulo: 'Missão',
+      texto:
+        'Transformar momentos em memórias únicas por meio da personalização, levando criatividade e qualidade a cada detalhe. Além disso, contribuir para o sucesso dos nossos parceiros lojistas, oferecendo soluções inovadoras e produtos que encantam seus clientes.',
+    },
+    {
+      icon: Eye,
+      titulo: 'Visão',
+      texto:
+        'Ser uma empresa referência em personalização de copos e distribuição de produtos para lojistas, reconhecida pela qualidade, inovação e pelo impacto positivo que geramos na vida dos nossos clientes e parceiros.',
+    },
+    {
+      icon: Heart,
+      titulo: 'Valores',
+      texto:
+        'Valorizamos cada cliente, parceiro e colaborador, reconhecendo que o crescimento da empresa é fruto do trabalho conjunto e da confiança que conquistamos.',
+    },
+  ]
+  return (
+    <section id="mvv" className="py-24 md:py-32 px-4 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="text-brand font-bold uppercase tracking-widest text-xs mb-4">
+            Quem somos
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            Missão, Visão e Valores
+          </h2>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            Os princípios que orientam cada decisão, cada peça produzida e cada relacionamento.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {itens.map((item) => (
+            <div
+              key={item.titulo}
+              className="group relative bg-slate-50 hover:bg-white border border-slate-100 hover:border-brand/20 rounded-2xl p-8 transition-all hover:shadow-xl hover:-translate-y-1"
+            >
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-brand text-white rounded-2xl mb-5 shadow-lg shadow-brand/20 group-hover:scale-110 transition-transform">
+                <item.icon size={26} />
+              </div>
+              <h3 className="font-display text-2xl font-bold text-brand-dark mb-3 uppercase tracking-tight">
+                {item.titulo}
+              </h3>
+              <p className="text-slate-600 leading-relaxed">{item.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Produtos() {
   return (
     <section id="produtos" className="py-24 md:py-32 px-4 bg-slate-50">
@@ -306,22 +359,34 @@ function Produtos() {
           {CATALOGOS.map((cat) => (
             <div
               key={cat.titulo}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all hover:-translate-y-1 flex flex-col"
             >
-              <div className={`h-40 bg-gradient-to-br ${cat.cor} relative`}>
-                <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)',
-                  }}
+              <a
+                href={`/catalogos/${cat.arquivo}`}
+                target="_blank"
+                rel="noreferrer"
+                className="block relative bg-slate-100 aspect-[3/4] overflow-hidden"
+                title={`Abrir ${cat.titulo}`}
+              >
+                <img
+                  src={cat.capa}
+                  alt={`Capa ${cat.titulo}`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                  <span className="text-white/70 text-xs font-bold uppercase tracking-wider">Catálogo</span>
+                <div className="absolute top-3 left-3">
+                  <span className="bg-black/60 backdrop-blur-sm text-white/90 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">
+                    Catálogo
+                  </span>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-display font-bold text-slate-900 text-lg mb-4">{cat.titulo}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                  <span className="text-white text-sm font-bold flex items-center gap-2">
+                    <Download size={16} /> Ver catálogo
+                  </span>
+                </div>
+              </a>
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="font-display font-bold text-slate-900 text-lg mb-4 flex-1">{cat.titulo}</h3>
                 <div className="flex gap-2">
                   <a
                     href={`/catalogos/${cat.arquivo}`}
@@ -329,7 +394,7 @@ function Produtos() {
                     rel="noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white text-sm font-bold px-4 py-2.5 rounded-lg transition"
                   >
-                    <Download size={16} /> Baixar PDF
+                    <Download size={16} /> Baixar
                   </a>
                   <a
                     href={whatsappLink(`Olá! Quero mais informações sobre "${cat.titulo}".`)}
@@ -355,55 +420,6 @@ function Produtos() {
           >
             Falar direto com um consultor <ArrowRight size={16} />
           </a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function Sistemas() {
-  return (
-    <section id="sistemas" className="py-24 md:py-32 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="text-brand font-bold uppercase tracking-widest text-xs mb-4">Ecossistema</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Nossas plataformas
-          </h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-            Além dos produtos, oferecemos soluções digitais próprias — desde análise comportamental
-            até catálogo online e gestão interna.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {SISTEMAS.map((s) => (
-            <a
-              key={s.nome}
-              href={s.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative overflow-hidden bg-gradient-to-br from-brand-dark via-brand to-brand-light rounded-2xl p-8 text-white shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
-            >
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage:
-                    'radial-gradient(circle at 70% 20%, rgba(255,255,255,0.6) 0%, transparent 50%)',
-                }}
-              />
-              <div className="relative">
-                <div className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">
-                  Plataforma
-                </div>
-                <h3 className="font-display text-2xl font-bold mb-2">{s.nome}</h3>
-                <p className="text-white/80 text-sm mb-6 leading-relaxed">{s.descricao}</p>
-                <div className="inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all">
-                  Acessar <ExternalLink size={16} />
-                </div>
-              </div>
-            </a>
-          ))}
         </div>
       </div>
     </section>
@@ -588,7 +604,6 @@ function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="#sobre" className="hover:text-white transition">Sobre nós</a></li>
               <li><a href="#produtos" className="hover:text-white transition">Catálogos</a></li>
-              <li><a href="#sistemas" className="hover:text-white transition">Plataformas</a></li>
               <li><a href="#contato" className="hover:text-white transition">Contato</a></li>
             </ul>
           </div>
@@ -651,8 +666,8 @@ export default function App() {
       <Hero />
       <Numeros />
       <Sobre />
+      <MissaoVisaoValores />
       <Produtos />
-      <Sistemas />
       <Depoimentos />
       <Contato />
       <Footer />
